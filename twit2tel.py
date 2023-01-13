@@ -3,6 +3,7 @@ import json
 import telegram
 import asyncio
 import re
+import sys
 
 CONFIG_FILE = "config.json"
 async def get_ids(bot: telegram.Bot, config: dict) -> dict:
@@ -22,6 +23,8 @@ async def send_telegram_message(bot: telegram.Bot, config: dict, message: str):
             await bot.send_message(text=message, chat_id=user_id, parse_mode=telegram.constants.ParseMode.HTML)
 
 def main() -> None:
+    if len(sys.argv) == 2:
+        CONFIG_FILE = sys.argv[1]
     with open(CONFIG_FILE, "r") as file:
         config = json.load(file)
     bot = telegram.Bot(config["telegram_token"])
