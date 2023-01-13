@@ -24,8 +24,10 @@ async def send_telegram_message(bot: telegram.Bot, config: dict, message: str):
 
 def main() -> None:
     if len(sys.argv) == 2:
-        CONFIG_FILE = sys.argv[1]
-    with open(CONFIG_FILE, "r") as file:
+        filepath = sys.argv[1]
+    else:
+        filepath = CONFIG_FILE
+    with open(filepath, "r") as file:
         config = json.load(file)
     bot = telegram.Bot(config["telegram_token"])
     api = tweepy.Client(config["twitter_bearer"])
