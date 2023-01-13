@@ -53,8 +53,8 @@ def main() -> None:
             config["last_tweets"][username] = (user_id, last_tweet.id)
 
     data = json.dumps(config, indent=4)
-    # with open(CONFIG_FILE, "w") as file:
-    #     file.write(data)
+    with open(CONFIG_FILE, "w") as file:
+        file.write(data)
 
 
 if __name__ == "__main__":
