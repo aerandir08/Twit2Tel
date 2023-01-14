@@ -41,7 +41,7 @@ def main() -> None:
             config["last_tweets"][username] = (id, 0)
 
     for user_name, (user_id, tweet_id) in config["last_tweets"].items():
-        last_tweet = api.get_users_tweets(user_id).data[5]
+        last_tweet = api.get_users_tweets(user_id).data[0]
         if last_tweet.text.startswith("RT "):
             break
         if last_tweet.id != tweet_id:
@@ -58,7 +58,7 @@ def main() -> None:
             config["last_tweets"][username] = (user_id, last_tweet.id)
 
     data = json.dumps(config, indent=4)
-    with open(CONFIG_FILE, "w") as file:
+    with open(filepath, "w") as file:
         file.write(data)
 
 
